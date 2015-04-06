@@ -4070,8 +4070,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
   border: 1px solid transparent;
+}
+.navbar a {
+  color: white;
+}
+.navbar a:hover {
+  color: black;
 }
 @media (min-width: 768px) {
   .navbar {
@@ -4257,8 +4262,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-nav {
-    float: left;
-    margin: 0;
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    float:none;
   }
   .navbar-nav > li {
     float: left;
@@ -6583,3 +6590,11 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.navbar-wrapper {
+  background-color: #222;
+  border-color: #080808; 
+}
+.navbar-wrapper .title {
+  color: white;
+}

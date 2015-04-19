@@ -16,7 +16,9 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <style>
       #map-canvas {
-        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 650px;
         height: 500px;
         background-color: #CCC;
       }
@@ -68,6 +70,7 @@
 
     <!-- CONTENT -->
     <div class="container">
+      <p></p>
       <div class="row">
         <div class="col-md-7">
           <div id="map-canvas"></div>
@@ -97,7 +100,7 @@
           </ul>
         </div>
       </div>
-      
+      <p></p>
 
       <!-- FOOTER -->
       <footer>
@@ -119,13 +122,167 @@
     <script>
       function initialize() {
         var mapCanvas = document.getElementById('map-canvas');
+
         var mapOptions = {
           center: new google.maps.LatLng(42.056624, -84.114521),
-          zoom: 13,
+          zoom: 11,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(mapCanvas, mapOptions)
+
+        // Locations of Interest
+        // --------------------------------
+        var MIS = new google.maps.LatLng(42.064825, -84.240862);
+        var hiddenLakeGardens = new google.maps.LatLng(42.022705, -84.107256);
+        var walkerTavern = new google.maps.LatLng(42.063981, -84.223554);
+        var WJHStatePark = new google.maps.LatLng(42.064737, -84.135593);
+        var CherryHillWinery = new google.maps.LatLng(42.050770, -84.301281);
+
+        // Information Window Text
+        // --------------------------------
+        var iw_HiddenLakeGardens = new google.maps.InfoWindow({
+          content: '<div id="content">' +
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Hidden Lake Gardens</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>Hidden Lake Gardens</b> colloquially known as Hidden Lake 755 acres (3.06 km2), is a botanical garden and an arboretum operated by Michigan State University situated in the Irish Hills of southeast Michigan. The Gardens are known for their large collection of native and nonnative trees, shrubs and flowers. HLG was given to Michigan State University by Harry Fee in 1945. Today it is visited by nearly 45,000 people annually.</p>'+
+          '<p>Attribution: Hidden Lake Gardens, <a href="http://en.wikipedia.org/wiki/Hidden_Lake_Gardens">'+
+          'http://en.wikipedia.org/wiki/Hidden_Lake_Gardens</a> '+
+          '(last visited April 19, 2015).</p>'+
+          '</div>'+
+          '</div>'
+        });
+
+        var iw_MIS = new google.maps.InfoWindow({
+          content: '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Michigan International Speedway</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>MIS</b>, is a two-mile (3.2 km) moderate-banked D-shaped speedway located ' +
+          'off U.S. Freeway 12 on more than 1,400 acres (5.7 km2)[1] approximately four-mile ' +
+          '(6.4 km) south of the village of Brooklyn, in the scenic Irish Hills area of southeastern ' +
+          'Michigan. The track is used primarily for NASCAR events. It is sometimes known as a "sister track" ' + 
+          'to Texas World Speedway, and was used as the basis of Auto Club Speedway. The track ' +
+          'is owned by International Speedway Corporation (ISC). ' +
+          'Michigan is the fastest track in NASCAR due to its wide, sweeping corners and long straightaways. </p>'+
+          '<p>Attribution: MIS, <a href="http://en.wikipedia.org/wiki/Michigan_International_Speedway">'+
+          'http://en.wikipedia.org/wiki/Michigan_International_Speedway</a> '+
+          '(last visited April 19, 2015).</p>'+
+          '</div>'+
+          '</div>'
+        });
+
+        var iw_WalkerTavern = new google.maps.InfoWindow({
+          content: '<div id="content">' +
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Walker Tavern</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>The Walker Tavern</b> is a historic structure located at 11710 U.S. Route 12 in Cambridge Township in northwesternmost Lenawee County, Michigan. It was designated as a Michigan Historic Site on February 19, 1958 and was later the county\'s first property added to the National Register of Historic Places on January 25, 1971.</p>'+
+          '<p>Attribution: Walker Tavern, <a href="http://en.wikipedia.org/wiki/Walker_Tavern">'+
+          'http://en.wikipedia.org/wiki/Walker_Tavern</a> '+
+          '(last visited April 19, 2015).</p>'+
+          '</div>'+
+          '</div>'
+        });
+        var iw_WJHStatePark = new google.maps.InfoWindow({
+          content: '<div id="content">' +
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Walter J. Hayes State Park</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>Walter J. Hayes State Park</b> is a 654-acre (2.65 km2) state park in the U.S. state of Michigan. It is located along US Highway 12 in the Irish Hills region of Lenawee County and extending into small parts of Jackson and Washtenaw counties in the Round Lake area. The park is surrounded by scenic lakes, namely Wamplers, Evans, and Sand lakes, as well as chains of smaller lakes.'+
+          '<p>Attribution: Walter J. Hayes State Park, <a href="http://en.wikipedia.org/wiki/Hayes_State_Park">'+
+          'http://en.wikipedia.org/wiki/Hayes_State_Park</a> '+
+          '(last visited April 19, 2015).</p>'+
+          '</div>'+
+          '</div>'
+        });
+        var iw_CherryHillWinery = new google.maps.InfoWindow({
+          content: '<div id="content">' +
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Cherry Hill Winery</h1>'+
+          '<div id="bodyContent">'+
+          '<p>Located in a Historic 1870 Schoolhouse, this is one stop you don\'t want to miss! Come and taste their Award Winning Wines at the knotty pine bar. Sample Cherry Creeks freshly made Butter Fudge, or taste their Michigan Cherry Preserves. '+
+          '<p>Attribution: Cherry Creek Winery, <a href="http://www.cherrycreekwine.com/scripts/winerypg.cfm">'+
+          'http://www.cherrycreekwine.com/scripts/winerypg.cfm</a> '+
+          '(last visited April 19, 2015).</p>'+
+          '</div>'+
+          '</div>'
+        });
+        var iw_title = new google.maps.InfoWindow({
+          content: '<div id="content">' +
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">TfdsafasdfITLE</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>HEADING</b>CONTENT'+
+          '</div>'+
+          '</div>'
+        });
+        var iw_title = new google.maps.InfoWindow({
+          content: '<div id="content">' +
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">TfdsafasdfITLE</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>HEADING</b>CONTENT'+
+          '</div>'+
+          '</div>'
+        });
+
+        // Map Markers
+        // --------------------------------
+        var mkr_MIS = new google.maps.Marker({
+          position: MIS,
+          map: map,
+          title: 'Michigan International Speedway'
+        });
+        var mkr_hiddenLakeGardens = new google.maps.Marker({
+          position: hiddenLakeGardens,
+          map: map,
+          title: 'Hidden Lake Gardens'
+        });
+        var mkr_walkerTavern = new google.maps.Marker({
+          position: walkerTavern,
+          map: map,
+          title: 'Walker Tavern Historical Complex'
+        });
+        var mkr_WJHStatePark = new google.maps.Marker({
+          position: WJHStatePark,
+          map: map,
+          title: 'Walter J. Hayes State Park'
+        });
+        var mkr_CherryHillWinery = new google.maps.Marker({
+          position: CherryHillWinery,
+          map: map,
+          title: 'Cherry Hill Winery'
+        });
+
+        // Listeners
+        // --------------------------------
+        google.maps.event.addListener(mkr_MIS, 'click', function() {
+          iw_MIS.open(map, mkr_MIS);
+        });
+        google.maps.event.addListener(mkr_hiddenLakeGardens, 'click', function() {
+          iw_HiddenLakeGardens.open(map, mkr_hiddenLakeGardens);
+        });
+        google.maps.event.addListener(mkr_walkerTavern, 'click', function() {
+          iw_WalkerTavern.open(map, mkr_walkerTavern);
+        });
+        google.maps.event.addListener(mkr_WJHStatePark, 'click', function() {
+          iw_WJHStatePark.open(map, mkr_WJHStatePark);
+        });
+        google.maps.event.addListener(mkr_CherryHillWinery, 'click', function() {
+          iw_CherryHillWinery.open(map, mkr_CherryHillWinery);
+        });
+        
       }
+
+      
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </body>

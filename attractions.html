@@ -15,12 +15,23 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <style>
-      #map-canvas {
-        margin-left: auto;
-        margin-right: auto;
-        width: 650px;
-        height: 500px;
-        background-color: #CCC;
+      @media (min-width:767px) {
+        #map-canvas {
+          margin-left: auto;
+          margin-right: auto;
+          width: 650px;
+          height: 500px;
+          background-color: #CCC;
+        }
+      } 
+      @media screen and (max-width: 767px) {
+          #map-canvas {
+          margin-left: auto;
+          margin-right: auto;
+          width: 400px;
+          height: 300px;
+          background-color: #CCC;
+        }
       }
     </style>
 

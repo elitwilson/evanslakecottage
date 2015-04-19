@@ -141,11 +141,6 @@
         }
         var map = new google.maps.Map(mapCanvas, mapOptions)
 
-        // Locations of Interest
-        // --------------------------------
-        //var WJHStatePark = new google.maps.LatLng(42.064737, -84.135593);
-        //var CherryHillWinery = new google.maps.LatLng(42.050770, -84.301281);
-
         var places = [];
         var listeners = [];
         var infoWindows = [];
@@ -257,6 +252,17 @@
         cherryHillWinery.title = 'Cherry Hill Winery';
         places.push(cherryHillWinery);
 
+        /*var evansLake = new Object();
+        evansLake.infoContent = 
+          '<div id="content">' +
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Evan\'s Lake</h1>'+
+          '</div>';
+        evansLake.latLng = [42.056628, -84.114162];
+        evansLake.title = 'Evan\'s Lake';
+        places.push(evansLake);*/
+
         function setPlaces() {
           for (i=0;i<places.length;i++) {
             var infoWindow = new google.maps.InfoWindow({
@@ -286,8 +292,22 @@
           };
         };
         setPlaces();
-      
+
+        var defaultLatLng = new google.maps.LatLng(42.056628, -84.114162);
+        var defaultInfoWindow = new google.maps.InfoWindow({
+          content: 'Evan\'s Lake'
+        });
+        var defaultMarker = new google.maps.Marker({
+          position: defaultLatLng,
+          map: map,
+          title: 'Evan\'s Lake'
+        });
+        infoWindows.push(defaultInfoWindow);
+        defaultInfoWindow.open(map, defaultMarker);
       }
+
+      
+
 
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
